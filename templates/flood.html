@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Обязательные пункты раздела «Флуд»</title>
+  <style>
+    :root {
+      --bg-1: #07130b;
+      --bg-2: #0d2314;
+      --bg-3: #12301b;
+      --mint: #bff3c7;
+      --mint-2: #8fe6a0;
+      --leaf: #4fd16f;
+      --leaf-2: #2aa84b;
+      --sage: #dff8e4;
+      --white: #f8fff9;
+      --card: rgba(12, 30, 18, 0.72);
+      --card-2: rgba(250, 255, 251, 0.88);
+      --line: rgba(191, 243, 199, 0.28);
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #eefcef;
+      background:
+        radial-gradient(circle at top, rgba(79, 209, 111, 0.14), transparent 32%),
+        linear-gradient(180deg, #07130b 0%, #0b1b10 28%, #0f2415 55%, #08110a 100%);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      position: relative;
+      min-height: 100vh;
+      isolation: isolate;
+    }
+
+    .page::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url('/static/images/phone.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.08;
+      filter: blur(1px) saturate(1.1);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .page::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(4, 10, 6, 0.72), rgba(4, 10, 6, 0.26) 18%, rgba(4, 10, 6, 0.6) 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .shell {
+      width: min(1200px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 18px 0 56px;
+    }
+
+    .hero,
+    .nav-panel,
+    .section-banner,
+    .white-banner,
+    .note,
+    .article-card,
+    .callout,
+    .quote-box,
+    .subsection,
+    .mini-card {
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 320px;
+      border-radius: 34px;
+      overflow: hidden;
+      background-image: url('/static/images/gree.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(4, 12, 7, 0.46), rgba(5, 16, 9, 0.72)),
+        radial-gradient(circle at 50% 15%, rgba(191, 243, 199, 0.18), transparent 35%);
+      backdrop-filter: blur(2px);
+      z-index: -1;
+    }
+
+    .hero-inner {
+      width: min(980px, calc(100% - 26px));
+      padding: 38px 26px;
+      text-align: center;
+      background: rgba(7, 18, 10, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      padding: 9px 16px;
+      border-radius: 999px;
+      color: #eaffec;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    h1 {
+      margin: 18px 0 10px;
+      font-size: clamp(28px, 5vw, 60px);
+      line-height: 1.02;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      text-shadow: 0 6px 28px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero p {
+      margin: 0 auto;
+      max-width: 760px;
+      color: rgba(234, 255, 238, 0.9);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .nav-panel {
+      margin-top: 20px;
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      background-image: url('/static/images/lek.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .nav-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(4, 12, 7, 0.8), rgba(9, 24, 13, 0.58));
+    }
+
+    .nav-inner {
+      position: relative;
+      padding: 18px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .nav-title {
+      padding: 0;
+      border-radius: 0;
+      background: transparent;
+      border: none;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-align: center;
+      font-size: 14px;
+      color: rgba(241, 255, 243, 0.92);
+    }
+
+    .nav-link {
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: rgba(191, 243, 199, 0.12);
+      border: 1px solid rgba(191, 243, 199, 0.18);
+      color: #f1fff3;
+      transition: 0.2s ease;
+      font-weight: 700;
+    }
+    .nav-link:hover {
+      transform: translateY(-2px);
+      background: rgba(79, 209, 111, 0.18);
+      border-color: rgba(191, 243, 199, 0.35);
+    }
+
+    .content {
+      margin-top: 26px;
+      display: grid;
+      gap: 22px;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .content::before {
+      content: "";
+      position: absolute;
+      inset: -18px -10px -18px -10px;
+      background-image: url('/static/images/phone.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.18;
+      filter: blur(1.2px) saturate(1.05);
+      border-radius: 34px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .section-banner {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      background-image: url('./images/lek.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .section-banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(6, 20, 11, 0.82), rgba(10, 33, 18, 0.52));
+    }
+
+    .section-banner .inner {
+      position: relative;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .section-banner .label {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(223, 248, 228, 0.8);
+    }
+
+    .section-banner h2 {
+      margin: 0;
+      font-size: clamp(22px, 3.6vw, 36px);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .white-banner {
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.97), rgba(231, 249, 235, 0.96));
+      color: #0d2213;
+      padding: 18px 22px;
+      border: 1px solid rgba(87, 167, 98, 0.18);
+    }
+    .white-banner h3 {
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: clamp(20px, 3vw, 28px);
+    }
+
+    .article-card,
+    .subsection,
+    .callout,
+    .quote-box,
+    .note,
+    .mini-card {
+      border-radius: 24px;
+      background: rgba(10, 25, 15, 0.82);
+      backdrop-filter: blur(8px);
+    }
+
+    .article-card {
+      padding: 22px;
+    }
+
+    .section-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .heading-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 6px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(191, 243, 199, 0.12);
+      border: 1px solid rgba(191, 243, 199, 0.18);
+      color: var(--sage);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .article-card p,
+    .subsection p,
+    .callout p,
+    .note p,
+    .quote-box p,
+    .mini-card p,
+    li {
+      line-height: 1.75;
+      color: rgba(238, 252, 239, 0.92);
+    }
+
+    .article-card p,
+    .subsection p,
+    .callout p,
+    .note p,
+    .quote-box p {
+      margin: 0;
+    }
+
+    .rules-list,
+    .number-list,
+    .plain-list {
+      margin: 0;
+      padding-left: 22px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .rules-list > li,
+    .number-list > li,
+    .plain-list > li {
+      padding-left: 6px;
+    }
+
+    .article-card .title,
+    .subsection .title,
+    .callout .title {
+      margin: 0 0 10px;
+      font-size: 20px;
+      color: #f3fff5;
+    }
+
+    .subsection {
+      padding: 20px;
+    }
+
+    .subsection h4 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .subheading {
+      font-size: 18px;
+      font-weight: 800;
+      margin: 10px 0 12px;
+      color: #f0fff2;
+    }
+
+    .subheading.small {
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    .split {
+      display: grid;
+      gap: 16px;
+    }
+
+    .note {
+      padding: 18px 18px 18px 20px;
+      border-left: 5px solid var(--leaf);
+      background: rgba(14, 35, 20, 0.82);
+    }
+
+    .mini-card {
+      padding: 16px 18px;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .callout {
+      padding: 8px 4px 0;
+      background: transparent;
+      color: rgba(240, 255, 242, 0.9);
+      text-align: center;
+      border: none;
+      box-shadow: none;
+    }
+    .callout .title,
+    .callout p {
+      color: rgba(241, 255, 243, 0.76);
+    }
+    .callout .title {
+      margin-bottom: 12px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, rgba(255,255,255,0.72), rgba(191,243,199,0.88), rgba(255,255,255,0.66));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .quote-box {
+      padding: 20px;
+      text-align: center;
+      border: 1px solid rgba(191, 243, 199, 0.26);
+      background: linear-gradient(180deg, rgba(8, 24, 13, 0.92), rgba(19, 48, 28, 0.84));
+    }
+
+    .quote-box p {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .quote-box .emoji {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 24px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #f0fff2;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .back-mini {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 12px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(191, 243, 199, 0.28);
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(241, 255, 243, 0.95);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      width: fit-content;
+      transition: 0.2s ease;
+    }
+
+    .back-mini:hover {
+      transform: translateY(-1px);
+      background: rgba(79, 209, 111, 0.14);
+      border-color: rgba(191, 243, 199, 0.42);
+    }
+
+    .back-mini.light {
+      background: rgba(10, 25, 15, 0.08);
+    }
+
+    .two-cols {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+    }
+
+    .stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .accent-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(191, 243, 199, 0.55), transparent);
+      margin: 16px 0;
+    }
+
+    .center {
+      display: grid;
+      place-items: center;
+    }
+
+    .muted {
+      color: rgba(238, 252, 239, 0.72);
+    }
+
+    .tiny {
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .two-cols { grid-template-columns: 1fr; }
+      .hero { min-height: 280px; }
+      .hero-inner { padding: 30px 18px; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 16px, 1200px); }
+      .hero, .nav-panel, .section-banner { border-radius: 22px; }
+      .article-card, .subsection, .callout, .quote-box, .note, .mini-card, .white-banner { border-radius: 18px; }
+      .nav-inner { justify-content: flex-start; }
+      .nav-link { width: 100%; text-align: center; }
+      h1 { font-size: 30px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <main class="shell">
+      <section class="hero" id="top">
+        <div class="hero-inner">
+          <div class="hero-kicker">✦ green mood · roleplay layout ✦</div>
+          <h1>ОБЯЗАТЕЛЬНЫЕ ПУНКТЫ РАЗДЕЛА «ФЛУД»</h1>
+          <p>
+            Полупрозрачный верхний баннер, зелёная палитра, аккуратная структура и место для всего текста без лишних придумок. Всё, как просили: красиво, насыщенно и без самодеятельности.
+          </p>
+        </div>
+      </section>
+
+      <nav class="nav-panel" aria-label="Навигация">
+        <div class="nav-inner">
+          <div class="nav-title">Навигация</div>
+          <a class="nav-link" href="#general">Общие правила</a>
+          <a class="nav-link" href="#cleanings">Чистки</a>
+          <a class="nav-link" href="#norm">Норма / адаптационные периоды</a>
+        </div>
+      </nav>
+
+      <div class="content">
+        <section class="section-grid" id="general"><div class="white-banner">
+            <h3>общие правила</h3>
+            <a class="back-mini light" href="#top">вернуться обратно к навигации</a>
+          </div>
+
+          <article class="article-card">
+            <div class="heading-row">
+              <span class="pill">💬 Поведение в чате</span>
+            </div>
+            <ul class="rules-list">
+              <li>Нарушения оцениваются индивидуально.</li>
+              <li>Администрация вправе сначала выдать словесное предупреждение, прежде чем переходить к санкциям. В зависимости от ситуации может быть вынесен варн, мут или другая мера.</li>
+              <li>Неведение правил не освобождает от ответственности. Присоединяясь к группе, вы подтверждаете согласие со всеми правилами.</li>
+              <li>Правила могут меняться, и в этом случае участники будут оповещены.</li>
+              <li>Последнее слово остаётся за администрацией.</li>
+              <li>Администраторы также подчиняются этим правилам и могут быть лишены полномочий в случае их нарушения.</li>
+            </ul>
+          </article>
+
+          <article class="article-card">
+            <div class="heading-row">
+              <span class="pill">🚫 Нарушения и их нумерация</span>
+            </div>
+            <div class="split">
+              <div class="mini-card">
+                <div class="subheading">1. Конфликты 📜</div>
+                <p>
+                  В случае возникновения конфликта участники обязаны урегулировать его в личных сообщениях. Администрация вправе потребовать перенести дальнейшее обсуждение за пределы общего чата. При игнорировании данного требования администрация может ограничить возможность отправки сообщений всем участникам конфликта до прекращения спора.
+                </p>
+                <div class="accent-line"></div>
+                <ol class="number-list">
+                  <li>Оскорбления, дискриминация, угрозы и ссоры запрещены.</li>
+                  <li>Провокации и намеренное разжигание конфликтов запрещены.</li>
+                  <li>Неуважительное отношение к участникам или администрации запрещено.</li>
+                  <li>Оскорбления родственников и родителей запрещены.</li>
+                  <li>Уважайте личные границы других участников. Если человек сообщает, что ему неприятны определённые шутки, высказывания или действия в его адрес, их необходимо прекратить. Игнорирование подобных просьб может повлечь меры со стороны администрации.</li>
+                  <li>Если на участника поступило 2–3 подтверждённые жалобы, администрация вправе исключить его из ролевой.</li>
+                </ol>
+              </div>
+
+              <div class="mini-card">
+                <div class="subheading">2. Общение во флуде 💬</div>
+                <ol class="number-list">
+                  <li>Спам запрещён. Намеренный флуд и засорение чата сообщениями запрещены. Если вам нужно отправить несколько сообщений подряд по теме разговора — это не считается нарушением.</li>
+                  <li>Юмор допустим, если он понятен собеседнику. Обидные или провокационные шутки могут расцениваться как нарушение.</li>
+                  <li>Обсуждение политики разрешено только в уважительном формате. Запрещены переходы на личности, националистические и ксенофобные высказывания.</li>
+                </ol>
+              </div>
+
+              <div class="mini-card">
+                <div class="subheading">3. Конфиденциальность 🔒</div>
+                <ol class="number-list">
+                  <li>Распространение личной информации участников строго запрещено.</li>
+                </ol>
+              </div>
+
+              <div class="mini-card">
+                <div class="subheading">4. Вход и выход из ролевой 🚪</div>
+                <ol class="number-list">
+                  <li>Постоянные выходы и повторные заходы крайне нежелательны.</li>
+                  <li>Просьба писать роль при выходе. Причина ухода остаётся на ваше усмотрение.</li>
+                </ol>
+              </div>
+
+              <div class="mini-card">
+                <div class="subheading">5. Реклама 📢</div>
+                <ol class="number-list">
+                  <li>Реклама сторонних ролевых проектов запрещена без разрешения администрации.</li>
+                </ol>
+              </div>
+
+              <div class="mini-card">
+                <div class="subheading">6. Контент и триггерные темы 🔞</div>
+                <ol class="number-list">
+                  <li>NSFW/18+ контент допускается только под блюром и с соответствующим предупреждением (TW). Администрация может попросить скрыть контент под блюр даже без вынесения наказания.</li>
+                  <li>Запрещается пропаганда, романтизация или подробное описание самоповреждений, суицида, насилия и причинения вреда себе или другим. Личный опыт допускается к обсуждению, если это не травмирует других участников и не превращает чат в площадку для тяжёлых подробностей.</li>
+                  <li>Если вы сомневаетесь, можно ли публиковать материал — уточните у администрации.</li>
+                </ol>
+              </div>
+            </div>
+          </article>
+
+          <div class="quote-box">
+            <span class="emoji">✦</span>
+            <p>даже если вы не нарушаете правил, вас могут удалить из ролевой, если вы приносите существенный дискомфорт.</p>
+          </div>
+        </section>
+
+        <section class="section-grid" id="cleanings"><div class="white-banner">
+            <h3>чистки и нормы</h3>
+            <a class="back-mini light" href="#top">вернуться обратно к навигации</a>
+          </div>
+
+          <div class="two-cols">
+            <article class="article-card" id="cleanings-card">
+              <div class="heading-row">
+                <span class="pill">1 - ЧИСТКИ РОЛЕЙ</span>
+              </div>
+              <p>
+                Чистки ролей проводятся регулярно. Если вы заняли персонажа, активно отыгрывайте им.
+              </p>
+              <div class="accent-line"></div>
+              <ul class="plain-list">
+                <li>Минимальный размер поста — 20 предложений. Разрешены мини-посты («диалоговые»), если ситуация не требует подробностей. Посты, не соответствующие норме, не засчитываются при подсчёте активности.</li>
+                <li>Можно сменить персонажа или взять второго — максимум две роли на одного человека. В этом случае ответственность возрастает:</li>
+                <li>1 роль — минимум 1 пост в неделю.</li>
+                <li>2 роли — минимум 2 поста в неделю.</li>
+                <li>Игрок может запросить третью роль, если у него стабильная активность минимум 2 недели, и ни одна из ролей не страдает. Рассматривается индивидуально.</li>
+              </ul>
+            </article>
+
+            <aside class="stack">
+              <article class="article-card" id="norm">
+                <div class="heading-row">
+                  <span class="pill">2 - НОРМА И АДАПТАЦИОННЫЕ ПЕРИОДЫ</span>
+                </div>
+                <p>
+                  Во флуде нет нормы как таковой, но есть некоторые ключевые моменты!
+                </p>
+                <div class="accent-line"></div>
+                <div class="mini-card">
+                  <div class="subheading small">Первая неделя</div>
+                  <p>
+                    Первая неделя после вступления — защита от чистки, и правил про неактивность. Если чистка проводится до истечения 7 дней с момента вашего вступления, вы не будете удалены за неактивность. Ваша активность будет проверена при следующей чистке.
+                  </p>
+                </div>
+                <div class="mini-card" style="margin-top: 14px;">
+                  <div class="subheading small">Вторая неделя</div>
+                  <p>
+                    По истечении 7 дней с момента вступления необходимо соответствовать одному из следующих условий:
+                  </p>
+                  <ul class="plain-list" style="margin-top: 10px;">
+                    <li>Набрать минимум 150 сообщений во флуде.</li>
+                    <li>Написать пост.</li>
+                  </ul>
+                </div>
+                <div class="mini-card" style="margin-top: 14px; border: 1px solid rgba(191, 243, 199, 0.34); background: rgba(255,255,255,0.08);">
+                  <div class="subheading small">Третья неделя</div>
+                  <p>
+                    начиная с третьей недели идет стабильная норма - 1 пост на каждую неделю
+                  </p>
+                </div>
+              </article>
+
+              <div class="callout">
+                <div class="title">другое</div>
+                <p>✶⊶ ✨ Если участник не проявляет активность (включая флуд) в течение 3 дней без предупреждения — он исключается.</p>
+                <div class="accent-line" style="background: linear-gradient(90deg, transparent, rgba(16, 48, 26, 0.22), transparent);"></div>
+                <p>✶⊶ ✨ Проблемы с поиском партнёра: Если в течение 7 дней вы не смогли найти партнёра для ролевой игры, обязательно сообщите об этом администрации до истечения этого срока. Вам могут продлить срок адаптации или помочь с поиском партнёра.</p>
+                <div class="accent-line" style="background: linear-gradient(90deg, transparent, rgba(16, 48, 26, 0.22), transparent);"></div>
+                <p>✶⊶ ✨ Последствия невыполнения требований: Если после 7 дней с момента вступления вы не набрали 150 сообщений, не начали ролевую игру и не сообщили администрации о проблемах с поиском партнёра, ваш аккаунт может быть удалён из ролевой за бездействие. В таком случае следует обратиться к администрации, чтобы вам продлили срок или помогли с отыгрышем. Если чистка выпадает на период первой недели и участник ещё не успел отыграть, но во флуде активен менее 7 дней, он остаётся в группе, а активность проверяется при следующей чистке. Если участник пробыл во флуде более 7 дней и не начал ролевую игру без уважительной причины (и не сообщил об этом), его аккаунт будет удалён из проекта.</p>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
